@@ -28,12 +28,59 @@ public class BlackBooks extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jButtonListBooks = new javax.swing.JButton();
+        jButtonReaders = new javax.swing.JButton();
+        jButtonWaitingList = new javax.swing.JButton();
+        jButtonRentBook = new javax.swing.JButton();
+        jButtonReturnBook = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/blackBooks.png"))); // NOI18N
+
+        jButtonListBooks.setBackground(new java.awt.Color(0, 204, 0));
+        jButtonListBooks.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jButtonListBooks.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonListBooks.setText("List All Books");
+        jButtonListBooks.setMaximumSize(new java.awt.Dimension(160, 50));
+        jButtonListBooks.setMinimumSize(new java.awt.Dimension(160, 50));
+        jButtonListBooks.setPreferredSize(new java.awt.Dimension(160, 50));
+
+        jButtonReaders.setBackground(new java.awt.Color(153, 0, 153));
+        jButtonReaders.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jButtonReaders.setText("Readers");
+        jButtonReaders.setMaximumSize(new java.awt.Dimension(160, 50));
+        jButtonReaders.setMinimumSize(new java.awt.Dimension(160, 50));
+        jButtonReaders.setPreferredSize(new java.awt.Dimension(160, 50));
+        jButtonReaders.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonReadersActionPerformed(evt);
+            }
+        });
+
+        jButtonWaitingList.setBackground(new java.awt.Color(51, 102, 255));
+        jButtonWaitingList.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jButtonWaitingList.setText("Waiting List");
+        jButtonWaitingList.setMaximumSize(new java.awt.Dimension(160, 50));
+        jButtonWaitingList.setMinimumSize(new java.awt.Dimension(160, 50));
+        jButtonWaitingList.setPreferredSize(new java.awt.Dimension(160, 50));
+
+        jButtonRentBook.setBackground(new java.awt.Color(204, 0, 0));
+        jButtonRentBook.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jButtonRentBook.setText("Return Book");
+        jButtonRentBook.setMaximumSize(new java.awt.Dimension(160, 50));
+        jButtonRentBook.setMinimumSize(new java.awt.Dimension(160, 50));
+        jButtonRentBook.setPreferredSize(new java.awt.Dimension(160, 50));
+
+        jButtonReturnBook.setBackground(new java.awt.Color(255, 255, 0));
+        jButtonReturnBook.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jButtonReturnBook.setForeground(new java.awt.Color(0, 0, 0));
+        jButtonReturnBook.setText("Rent Book");
+        jButtonReturnBook.setMaximumSize(new java.awt.Dimension(160, 50));
+        jButtonReturnBook.setMinimumSize(new java.awt.Dimension(160, 50));
+        jButtonReturnBook.setPreferredSize(new java.awt.Dimension(160, 50));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -43,6 +90,23 @@ public class BlackBooks extends javax.swing.JFrame {
                 .addGap(198, 198, 198)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(202, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(80, 80, 80)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jButtonWaitingList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                            .addComponent(jButtonReturnBook, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(80, 80, 80)
+                            .addComponent(jButtonRentBook, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(80, 80, 80)
+                            .addComponent(jButtonListBooks, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(160, 160, 160)
+                            .addComponent(jButtonReaders, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGap(80, 80, 80)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -50,6 +114,18 @@ public class BlackBooks extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(389, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(149, 149, 149)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButtonListBooks, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonReaders, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGap(102, 102, 102)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButtonWaitingList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonRentBook, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonReturnBook, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap(149, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -65,6 +141,10 @@ public class BlackBooks extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButtonReadersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReadersActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonReadersActionPerformed
 
     /**
      * @param args the command line arguments
@@ -102,6 +182,11 @@ public class BlackBooks extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonListBooks;
+    private javax.swing.JButton jButtonReaders;
+    private javax.swing.JButton jButtonRentBook;
+    private javax.swing.JButton jButtonReturnBook;
+    private javax.swing.JButton jButtonWaitingList;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
