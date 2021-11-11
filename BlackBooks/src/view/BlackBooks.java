@@ -4,17 +4,22 @@
  */
 package view;
 
+import controller.BlackBooksController;
+
 /**
  *
  * @author alychinque
  */
 public class BlackBooks extends javax.swing.JFrame {
+    
+    private final BlackBooksController controller;
 
     /**
      * Creates new form BlackBooks
      */
     public BlackBooks() {
         initComponents();
+        controller = new BlackBooksController(this);
     }
 
     /**
@@ -47,6 +52,11 @@ public class BlackBooks extends javax.swing.JFrame {
         jButtonListBooks.setMaximumSize(new java.awt.Dimension(160, 50));
         jButtonListBooks.setMinimumSize(new java.awt.Dimension(160, 50));
         jButtonListBooks.setPreferredSize(new java.awt.Dimension(160, 50));
+        jButtonListBooks.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonListBooksActionPerformed(evt);
+            }
+        });
 
         jButtonReaders.setBackground(new java.awt.Color(153, 0, 153));
         jButtonReaders.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -145,6 +155,10 @@ public class BlackBooks extends javax.swing.JFrame {
     private void jButtonReadersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReadersActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonReadersActionPerformed
+
+    private void jButtonListBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListBooksActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonListBooksActionPerformed
 
     /**
      * @param args the command line arguments
