@@ -60,5 +60,4 @@ public class BlackBooksController {
         this.view.dispose();
         lisBooks.setVisible(true);
     }
- test
 }
