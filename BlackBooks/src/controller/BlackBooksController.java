@@ -56,7 +56,7 @@ public class BlackBooksController {
     }
 
     public void listAllBooks() {
-        ListBooks lisBooks = new ListBooks();
+        ListBooks lisBooks = new ListBooks(library, 1);
         this.view.dispose();
         lisBooks.setVisible(true);
     }

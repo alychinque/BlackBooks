@@ -5,6 +5,11 @@
 package view;
 
 import controller.ListBooksController;
+import java.util.ArrayList;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import model.Book;
 
 /**
  *
@@ -13,13 +18,21 @@ import controller.ListBooksController;
 public class ListBooks extends javax.swing.JFrame {
     
     private final ListBooksController controller;
+    private javax.swing.JPanel[] panelBook;
+    private javax.swing.JLabel[] title;
+    private javax.swing.JLabel[] nameAuthor;
+    private javax.swing.JLabel[] surnameAuthor;
+    private javax.swing.JLabel[] genre;
+    private javax.swing.JButton[] btnRent;
 
     /**
      * Creates new form ListBooks
      */
-    public ListBooks() {
+    public ListBooks(ArrayList<Book> library, int sizeLibrary) {
         initComponents();
-        controller = new ListBooksController(this);
+        this.controller = new ListBooksController(this);
+        genVariables(library, sizeLibrary);
+        
     }
 
     /**
@@ -33,14 +46,20 @@ public class ListBooks extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        titleLabel = new javax.swing.JLabel();
+        nameAuthorLabel = new javax.swing.JLabel();
+        surnameAuthorLabel = new javax.swing.JLabel();
+        genreLabel = new javax.swing.JLabel();
+        rent = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        panel = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setMaximumSize(new java.awt.Dimension(800, 500));
         setMinimumSize(new java.awt.Dimension(800, 500));
         setResizable(false);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setMaximumSize(new java.awt.Dimension(800, 500));
@@ -50,6 +69,39 @@ public class ListBooks extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/blackBooks.png"))); // NOI18N
 
+        titleLabel.setFont(new java.awt.Font("Liberation Mono", 0, 14)); // NOI18N
+        titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titleLabel.setText("Title");
+        titleLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.gray, null, null));
+        titleLabel.setPreferredSize(new java.awt.Dimension(150, 35));
+
+        nameAuthorLabel.setFont(new java.awt.Font("Liberation Mono", 0, 14)); // NOI18N
+        nameAuthorLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        nameAuthorLabel.setText("Author's name");
+        nameAuthorLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.gray, null, null));
+        nameAuthorLabel.setPreferredSize(new java.awt.Dimension(150, 35));
+
+        surnameAuthorLabel.setFont(new java.awt.Font("Liberation Mono", 0, 14)); // NOI18N
+        surnameAuthorLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        surnameAuthorLabel.setText("Author's surname");
+        surnameAuthorLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.gray, null, null));
+        surnameAuthorLabel.setPreferredSize(new java.awt.Dimension(150, 35));
+
+        genreLabel.setFont(new java.awt.Font("Liberation Mono", 0, 14)); // NOI18N
+        genreLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        genreLabel.setText("Genre");
+        genreLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.gray, null, null));
+        genreLabel.setPreferredSize(new java.awt.Dimension(150, 35));
+
+        rent.setFont(new java.awt.Font("Liberation Mono", 0, 14)); // NOI18N
+        rent.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        rent.setText("Rent");
+        rent.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.gray, null, null));
+        rent.setMaximumSize(new java.awt.Dimension(65, 35));
+        rent.setMinimumSize(new java.awt.Dimension(65, 35));
+        rent.setPreferredSize(new java.awt.Dimension(65, 35));
+        rent.setVerifyInputWhenFocusTarget(false);
+
         jButton1.setText("Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -57,43 +109,146 @@ public class ListBooks extends javax.swing.JFrame {
             }
         });
 
+        jScrollPane1.setMaximumSize(new java.awt.Dimension(650, 300));
+        jScrollPane1.setMinimumSize(new java.awt.Dimension(650, 300));
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(665, 300));
+
+        panel.setMaximumSize(new java.awt.Dimension(650, 300));
+        panel.setMinimumSize(new java.awt.Dimension(650, 300));
+        panel.setPreferredSize(new java.awt.Dimension(650, 300));
+
+        javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
+        panel.setLayout(panelLayout);
+        panelLayout.setHorizontalGroup(
+            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 650, Short.MAX_VALUE)
+        );
+        panelLayout.setVerticalGroup(
+            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        jScrollPane1.setViewportView(panel);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(198, 198, 198)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jButton1)))
-                .addContainerGap(202, Short.MAX_VALUE))
+                .addGap(200, 200, 200)
+                .addComponent(jLabel1))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(nameAuthorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(surnameAuthorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(genreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(rent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(80, 80, 80)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jButton1))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(340, 340, 340)
-                .addComponent(jButton1)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nameAuthorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(surnameAuthorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(genreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(rent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(jButton1))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void genVariables(ArrayList<Book> library, int sizeArray) {
+        try {
+            panelBook = new JPanel[sizeArray];
+            title = new JLabel[sizeArray];
+            nameAuthor = new JLabel[sizeArray];
+            surnameAuthor = new JLabel[sizeArray];
+            genre = new JLabel[sizeArray];
+            int yAxis = 0;
+            for (int i = 0; i < sizeArray; i++) {
+                panelBook[i] = new JPanel();
+                title[i] = new JLabel();
+                nameAuthor[i] = new JLabel();
+                surnameAuthor[i] = new JLabel();
+                genre[i] = new JLabel();
+                btnRent = new JButton[sizeArray];
+                // panel
+                panelBook[i].setBounds(0, 0, 650, 300);//500*30=15000
+                // title
+                title[i].setFont(new java.awt.Font("Liberation Mono", 0, 11)); // NOI18N
+                title[i].setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+                title[i].setText(library.get(i).getBookTitle());
+                title[i].setPreferredSize(new java.awt.Dimension(150, 30));
+                // name author
+                nameAuthor[i].setFont(new java.awt.Font("Liberation Mono", 0, 11)); // NOI18N
+                nameAuthor[i].setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+                nameAuthor[i].setText(library.get(i).getAuthorFirstName());
+                nameAuthor[i].setPreferredSize(new java.awt.Dimension(150, 30));
+                // surname author
+                surnameAuthor[i].setFont(new java.awt.Font("Liberation Mono", 0, 11)); // NOI18N
+                surnameAuthor[i].setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+                surnameAuthor[i].setText(library.get(i).getAuthorLastName());
+                surnameAuthor[i].setPreferredSize(new java.awt.Dimension(150, 30));
+                // genre
+                genre[i].setFont(new java.awt.Font("Liberation Mono", 0, 11)); // NOI18N
+                genre[i].setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+                genre[i].setText(library.get(i).getGenre());
+                genre[i].setPreferredSize(new java.awt.Dimension(150, 30));
+                // rent 50x35
+                btnRent[i].addActionListener(controller);
+                btnRent[i].setActionCommand(library.get(i).getIdBook());
+            }
+            
+        } catch (Exception e) {
+            
+        }
+    }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         controller.back();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel genreLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel nameAuthorLabel;
+    private javax.swing.JPanel panel;
+    private javax.swing.JLabel rent;
+    private javax.swing.JLabel surnameAuthorLabel;
+    private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }
