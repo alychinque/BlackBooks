@@ -26,7 +26,7 @@ public class ListBooksController implements ActionListener {
     }
 
     public void back() {
-        BlackBooks bb = new BlackBooks(1);
+        BlackBooks bb = new BlackBooks();
         this.view.dispose();
         bb.setVisible(true);
     }
@@ -34,7 +34,7 @@ public class ListBooksController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         try {
-            bookdao.rentBook(e.getActionCommand());
+            
         } catch (Exception exp) {
             JOptionPane.showMessageDialog(null, "Failed deleting the connection");
         }

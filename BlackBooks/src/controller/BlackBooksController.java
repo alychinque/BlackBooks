@@ -5,7 +5,6 @@
 package controller;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -34,7 +33,7 @@ public class BlackBooksController {
             String row;
             int i = 0;
             while ((row = csvReader.readLine()) != null) {
-                String[] data = row.split(",");
+                String[] data = row.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
                 if (i != 0) {
                     String id = data[0];
                     String authorFirstName = data[1];
@@ -55,8 +54,9 @@ public class BlackBooksController {
         }
     }
 
-    public void listAllBooks() {
-        ListBooks lisBooks = new ListBooks(library, 1);
+    public void listAllBooks(ArrayList<Book> library) {
+         int sizeLibrary = library.size();
+        ListBooks lisBooks = new ListBooks(library, sizeLibrary);
         this.view.dispose();
         lisBooks.setVisible(true);
     }

@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 import model.Book;
 
 /**
@@ -18,12 +20,16 @@ import model.Book;
 public class ListBooks extends javax.swing.JFrame {
     
     private final ListBooksController controller;
+    private javax.swing.JPanel panel;
     private javax.swing.JPanel[] panelBook;
     private javax.swing.JLabel[] title;
     private javax.swing.JLabel[] nameAuthor;
     private javax.swing.JLabel[] surnameAuthor;
     private javax.swing.JLabel[] genre;
     private javax.swing.JButton[] btnRent;
+    Object rowInfoData[] = new Object[4];
+
+    
 
     /**
      * Creates new form ListBooks
@@ -31,7 +37,7 @@ public class ListBooks extends javax.swing.JFrame {
     public ListBooks(ArrayList<Book> library, int sizeLibrary) {
         initComponents();
         this.controller = new ListBooksController(this);
-        genVariables(library, sizeLibrary);
+        setTable(library);
         
     }
 
@@ -44,211 +50,190 @@ public class ListBooks extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        titleLabel = new javax.swing.JLabel();
-        nameAuthorLabel = new javax.swing.JLabel();
-        surnameAuthorLabel = new javax.swing.JLabel();
-        genreLabel = new javax.swing.JLabel();
-        rent = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        background = new javax.swing.JPanel();
+        logo = new javax.swing.JLabel();
+        back = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        panel = new javax.swing.JPanel();
+        jTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setMaximumSize(new java.awt.Dimension(800, 500));
         setMinimumSize(new java.awt.Dimension(800, 500));
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel1.setMaximumSize(new java.awt.Dimension(800, 500));
-        jPanel1.setMinimumSize(new java.awt.Dimension(800, 500));
-        jPanel1.setPreferredSize(new java.awt.Dimension(800, 500));
-        jPanel1.setRequestFocusEnabled(false);
+        background.setBackground(new java.awt.Color(0, 0, 0));
+        background.setMaximumSize(new java.awt.Dimension(800, 500));
+        background.setMinimumSize(new java.awt.Dimension(800, 500));
+        background.setPreferredSize(new java.awt.Dimension(800, 500));
+        background.setRequestFocusEnabled(false);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/blackBooks.png"))); // NOI18N
+        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/blackBooks.png"))); // NOI18N
 
-        titleLabel.setFont(new java.awt.Font("Liberation Mono", 0, 14)); // NOI18N
-        titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titleLabel.setText("Title");
-        titleLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.gray, null, null));
-        titleLabel.setPreferredSize(new java.awt.Dimension(150, 35));
-
-        nameAuthorLabel.setFont(new java.awt.Font("Liberation Mono", 0, 14)); // NOI18N
-        nameAuthorLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        nameAuthorLabel.setText("Author's name");
-        nameAuthorLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.gray, null, null));
-        nameAuthorLabel.setPreferredSize(new java.awt.Dimension(150, 35));
-
-        surnameAuthorLabel.setFont(new java.awt.Font("Liberation Mono", 0, 14)); // NOI18N
-        surnameAuthorLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        surnameAuthorLabel.setText("Author's surname");
-        surnameAuthorLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.gray, null, null));
-        surnameAuthorLabel.setPreferredSize(new java.awt.Dimension(150, 35));
-
-        genreLabel.setFont(new java.awt.Font("Liberation Mono", 0, 14)); // NOI18N
-        genreLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        genreLabel.setText("Genre");
-        genreLabel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.gray, null, null));
-        genreLabel.setPreferredSize(new java.awt.Dimension(150, 35));
-
-        rent.setFont(new java.awt.Font("Liberation Mono", 0, 14)); // NOI18N
-        rent.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        rent.setText("Rent");
-        rent.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, java.awt.Color.lightGray, java.awt.Color.gray, null, null));
-        rent.setMaximumSize(new java.awt.Dimension(65, 35));
-        rent.setMinimumSize(new java.awt.Dimension(65, 35));
-        rent.setPreferredSize(new java.awt.Dimension(65, 35));
-        rent.setVerifyInputWhenFocusTarget(false);
-
-        jButton1.setText("Back");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        back.setText("Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                backActionPerformed(evt);
             }
         });
 
-        jScrollPane1.setMaximumSize(new java.awt.Dimension(650, 300));
-        jScrollPane1.setMinimumSize(new java.awt.Dimension(650, 300));
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(665, 300));
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title", "Author's name", "Author's surname", "Genre"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable);
 
-        panel.setMaximumSize(new java.awt.Dimension(650, 300));
-        panel.setMinimumSize(new java.awt.Dimension(650, 300));
-        panel.setPreferredSize(new java.awt.Dimension(650, 300));
-
-        javax.swing.GroupLayout panelLayout = new javax.swing.GroupLayout(panel);
-        panel.setLayout(panelLayout);
-        panelLayout.setHorizontalGroup(
-            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 650, Short.MAX_VALUE)
-        );
-        panelLayout.setVerticalGroup(
-            panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-
-        jScrollPane1.setViewportView(panel);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
+        background.setLayout(backgroundLayout);
+        backgroundLayout.setHorizontalGroup(
+            backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(backgroundLayout.createSequentialGroup()
                 .addGap(200, 200, 200)
-                .addComponent(jLabel1))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(80, 80, 80)
-                .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(nameAuthorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(surnameAuthorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(genreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(rent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(80, 80, 80)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jButton1))
+                .addComponent(logo)
+                .addGap(200, 200, 200))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
+                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(back)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        backgroundLayout.setVerticalGroup(
+            backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(backgroundLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(10, 10, 10)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nameAuthorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(surnameAuthorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(genreLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(rent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
-                .addComponent(jButton1))
+                .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(back)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(background, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(background, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void genVariables(ArrayList<Book> library, int sizeArray) {
-        try {
-            panelBook = new JPanel[sizeArray];
-            title = new JLabel[sizeArray];
-            nameAuthor = new JLabel[sizeArray];
-            surnameAuthor = new JLabel[sizeArray];
-            genre = new JLabel[sizeArray];
-            int yAxis = 0;
-            for (int i = 0; i < sizeArray; i++) {
-                panelBook[i] = new JPanel();
-                title[i] = new JLabel();
-                nameAuthor[i] = new JLabel();
-                surnameAuthor[i] = new JLabel();
-                genre[i] = new JLabel();
-                btnRent = new JButton[sizeArray];
-                // panel
-                panelBook[i].setBounds(0, 0, 650, 300);//500*30=15000
-                // title
-                title[i].setFont(new java.awt.Font("Liberation Mono", 0, 11)); // NOI18N
-                title[i].setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-                title[i].setText(library.get(i).getBookTitle());
-                title[i].setPreferredSize(new java.awt.Dimension(150, 30));
-                // name author
-                nameAuthor[i].setFont(new java.awt.Font("Liberation Mono", 0, 11)); // NOI18N
-                nameAuthor[i].setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-                nameAuthor[i].setText(library.get(i).getAuthorFirstName());
-                nameAuthor[i].setPreferredSize(new java.awt.Dimension(150, 30));
-                // surname author
-                surnameAuthor[i].setFont(new java.awt.Font("Liberation Mono", 0, 11)); // NOI18N
-                surnameAuthor[i].setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-                surnameAuthor[i].setText(library.get(i).getAuthorLastName());
-                surnameAuthor[i].setPreferredSize(new java.awt.Dimension(150, 30));
-                // genre
-                genre[i].setFont(new java.awt.Font("Liberation Mono", 0, 11)); // NOI18N
-                genre[i].setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-                genre[i].setText(library.get(i).getGenre());
-                genre[i].setPreferredSize(new java.awt.Dimension(150, 30));
-                // rent 50x35
-                btnRent[i].addActionListener(controller);
-                btnRent[i].setActionCommand(library.get(i).getIdBook());
-            }
-            
-        } catch (Exception e) {
-            
-        }
-    }
-    
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         controller.back();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_backActionPerformed
 
+//    private void genVariables(ArrayList<Book> library, int sizeArray) {
+//        try {
+//            System.out.println("enter into try");
+//            panelBook = new JPanel[sizeArray];
+//            title = new JLabel[sizeArray];
+//            nameAuthor = new JLabel[sizeArray];
+//            surnameAuthor = new JLabel[sizeArray];
+//            genre = new JLabel[sizeArray];
+//            panel = new JPanel();
+//            int sizeYaxisPanel = sizeArray * 30;
+//            System.out.println(sizeYaxisPanel);
+//            panel.setPreferredSize(new java.awt.Dimension(650, sizeYaxisPanel));
+//            panel.setLayout(null);
+//            
+//            int yAxis = 0;
+//            for (int i = 0; i < sizeArray; i++) {
+//                panelBook[i] = new JPanel();
+//                title[i] = new JLabel();
+//                nameAuthor[i] = new JLabel();
+//                surnameAuthor[i] = new JLabel();
+//                genre[i] = new JLabel();
+//                btnRent = new JButton[sizeArray];
+//                System.out.println("created "+ i + "panels and labels");
+//                // panel
+//                panelBook[i].setBounds(0, 0, 650, yAxis);
+//                // title
+//                title[i].setFont(new java.awt.Font("Liberation Mono", 0, 11)); // NOI18N
+//                title[i].setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+//                title[i].setText(library.get(i).getBookTitle());
+//                title[i].setPreferredSize(new java.awt.Dimension(150, 30));
+//                title[i].setBounds(0, 0, 150, 30);String[] columns = {"Title", "Author's Name", "Author's Surname", "Genr
+//                // name author
+//                nameAuthor[i].setFont(new java.awt.Font("Liberation Mono", 0, 11)); // NOI18N
+//                nameAuthor[i].setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+//                nameAuthor[i].setText(library.get(i).getAuthorFirstName());
+//                nameAuthor[i].setPreferredSize(new java.awt.Dimension(150, 30));
+//                nameAuthor[i].setBounds(150, 0, 150, 30);
+//                // surname author
+//                surnameAuthor[i].setFont(new java.awt.Font("Liberation Mono", 0, 11)); // NOI18N
+//                surnameAuthor[i].setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+//                surnameAuthor[i].setText(library.get(i).getAuthorLastName());
+//                surnameAuthor[i].setPreferredSize(new java.awt.Dimension(150, 30));
+//                surnameAuthor[i].setBounds(300, 0, 150, 30);
+//                // genre
+//                genre[i].setFont(new java.awt.Font("Liberation Mono", 0, 11)); // NOI18N
+//                genre[i].setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+//                genre[i].setText(library.get(i).getGenre());
+//                genre[i].setPreferredSize(new java.awt.Dimension(150, 30));
+//                genre[i].setBounds(450, 0, 150, 30);
+//                // rent 50x35
+//                System.out.println("chega aqui?");
+////                btnRent[i].addActionListener(controller);
+////                btnRent[i].setActionCommand(library.get(i).getIdBook());
+////                btnRent[i].setBounds(600, 0, 50, 30);
+//                // add to panel
+//                panelBook[i].add(title[i]);
+//                panelBook[i].add(nameAuthor[i]);
+//                panelBook[i].add(surnameAuthor[i]);
+//                panelBook[i].add(genre[i]);
+//                panelBook[i].add(btnRent[i]);
+//                // add panel to the external panel
+//                panel.add(panelBook[i]);
+//                System.out.println("final for");
+//                yAxis += 30;
+//            }
+//            jScrollPane1.setViewportView(panel);
+//            this.validate();
+//            this.repaint();
+//        } catch (Exception e) {
+//            
+//        }
+//    }
+    
+    
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel genreLabel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton back;
+    private javax.swing.JPanel background;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel nameAuthorLabel;
-    private javax.swing.JPanel panel;
-    private javax.swing.JLabel rent;
-    private javax.swing.JLabel surnameAuthorLabel;
-    private javax.swing.JLabel titleLabel;
+    private javax.swing.JTable jTable;
+    private javax.swing.JLabel logo;
     // End of variables declaration//GEN-END:variables
+
+    private void genVariables2(ArrayList<Book> library) {
+        
+    }
+
+    private void setTable(ArrayList<Book> library) {
+        DefaultTableModel infoTableModel = (DefaultTableModel) jTable.getModel();
+        infoTableModel.setRowCount(0);
+        
+        for(int i=1; i< library.size(); i++){
+            rowInfoData[0] = library.get(i).getBookTitle();
+            rowInfoData[1] = library.get(i).getAuthorFirstName();
+            rowInfoData[2] = library.get(i).getAuthorLastName();
+            rowInfoData[3] = library.get(i).getGenre();
+            
+            infoTableModel.addRow(rowInfoData);
+        }
+        System.out.println(infoTableModel.getRowCount());
+        
+    }
 }
