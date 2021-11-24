@@ -38,9 +38,17 @@ public class BlackBooksController {
                     String id = data[0];
                     String authorFirstName = data[1];
                     String authorLastName = data[2];
-                    String booTitle = data[3];
+                    
+                    String title = data[3];
+                    String bookTitle;
+                    if(title.contains(",")){
+                        String [] split = data[3].split(",");
+                        bookTitle = split[1].substring(1, split[1].length() - 1) + " " + split[0].substring(1);
+                    }else{
+                        bookTitle = data[3];
+                    }
                     String genre = data[4];
-                    book = new Book(id, authorFirstName, authorLastName, booTitle, genre);
+                    book = new Book(id, authorFirstName, authorLastName, bookTitle, genre);
                     this.library.add(book);
                 }
                 i++;

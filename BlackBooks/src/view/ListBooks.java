@@ -6,9 +6,6 @@ package view;
 
 import controller.ListBooksController;
 import java.util.ArrayList;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.Book;
@@ -18,27 +15,20 @@ import model.Book;
  * @author alychinque
  */
 public class ListBooks extends javax.swing.JFrame {
-    
-    private final ListBooksController controller;
-    private javax.swing.JPanel panel;
-    private javax.swing.JPanel[] panelBook;
-    private javax.swing.JLabel[] title;
-    private javax.swing.JLabel[] nameAuthor;
-    private javax.swing.JLabel[] surnameAuthor;
-    private javax.swing.JLabel[] genre;
-    private javax.swing.JButton[] btnRent;
-    Object rowInfoData[] = new Object[4];
 
-    
+    private final ListBooksController controller;
+    Object rowInfoData[] = new Object[4];
+    private final ArrayList<Book> library;
 
     /**
      * Creates new form ListBooks
      */
     public ListBooks(ArrayList<Book> library, int sizeLibrary) {
         initComponents();
+        this.library = library;
         this.controller = new ListBooksController(this);
         setTable(library);
-        
+
     }
 
     /**
@@ -55,6 +45,8 @@ public class ListBooks extends javax.swing.JFrame {
         back = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable = new javax.swing.JTable();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -89,25 +81,44 @@ public class ListBooks extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable);
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "title", "name", "surname" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel1.setText("Order by:");
+
         javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
         background.setLayout(backgroundLayout);
         backgroundLayout.setHorizontalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(backgroundLayout.createSequentialGroup()
-                .addGap(200, 200, 200)
-                .addComponent(logo)
-                .addGap(200, 200, 200))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
-                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(back)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(backgroundLayout.createSequentialGroup()
+                        .addGap(200, 200, 200)
+                        .addComponent(logo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1)
+                        .addGap(4, 4, 4)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 1, Short.MAX_VALUE))
+                    .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(back)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(30, 30, 30))
         );
         backgroundLayout.setVerticalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -133,107 +144,37 @@ public class ListBooks extends javax.swing.JFrame {
         controller.back();
     }//GEN-LAST:event_backActionPerformed
 
-//    private void genVariables(ArrayList<Book> library, int sizeArray) {
-//        try {
-//            System.out.println("enter into try");
-//            panelBook = new JPanel[sizeArray];
-//            title = new JLabel[sizeArray];
-//            nameAuthor = new JLabel[sizeArray];
-//            surnameAuthor = new JLabel[sizeArray];
-//            genre = new JLabel[sizeArray];
-//            panel = new JPanel();
-//            int sizeYaxisPanel = sizeArray * 30;
-//            System.out.println(sizeYaxisPanel);
-//            panel.setPreferredSize(new java.awt.Dimension(650, sizeYaxisPanel));
-//            panel.setLayout(null);
-//            
-//            int yAxis = 0;
-//            for (int i = 0; i < sizeArray; i++) {
-//                panelBook[i] = new JPanel();
-//                title[i] = new JLabel();
-//                nameAuthor[i] = new JLabel();
-//                surnameAuthor[i] = new JLabel();
-//                genre[i] = new JLabel();
-//                btnRent = new JButton[sizeArray];
-//                System.out.println("created "+ i + "panels and labels");
-//                // panel
-//                panelBook[i].setBounds(0, 0, 650, yAxis);
-//                // title
-//                title[i].setFont(new java.awt.Font("Liberation Mono", 0, 11)); // NOI18N
-//                title[i].setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-//                title[i].setText(library.get(i).getBookTitle());
-//                title[i].setPreferredSize(new java.awt.Dimension(150, 30));
-//                title[i].setBounds(0, 0, 150, 30);String[] columns = {"Title", "Author's Name", "Author's Surname", "Genr
-//                // name author
-//                nameAuthor[i].setFont(new java.awt.Font("Liberation Mono", 0, 11)); // NOI18N
-//                nameAuthor[i].setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-//                nameAuthor[i].setText(library.get(i).getAuthorFirstName());
-//                nameAuthor[i].setPreferredSize(new java.awt.Dimension(150, 30));
-//                nameAuthor[i].setBounds(150, 0, 150, 30);
-//                // surname author
-//                surnameAuthor[i].setFont(new java.awt.Font("Liberation Mono", 0, 11)); // NOI18N
-//                surnameAuthor[i].setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-//                surnameAuthor[i].setText(library.get(i).getAuthorLastName());
-//                surnameAuthor[i].setPreferredSize(new java.awt.Dimension(150, 30));
-//                surnameAuthor[i].setBounds(300, 0, 150, 30);
-//                // genre
-//                genre[i].setFont(new java.awt.Font("Liberation Mono", 0, 11)); // NOI18N
-//                genre[i].setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-//                genre[i].setText(library.get(i).getGenre());
-//                genre[i].setPreferredSize(new java.awt.Dimension(150, 30));
-//                genre[i].setBounds(450, 0, 150, 30);
-//                // rent 50x35
-//                System.out.println("chega aqui?");
-////                btnRent[i].addActionListener(controller);
-////                btnRent[i].setActionCommand(library.get(i).getIdBook());
-////                btnRent[i].setBounds(600, 0, 50, 30);
-//                // add to panel
-//                panelBook[i].add(title[i]);
-//                panelBook[i].add(nameAuthor[i]);
-//                panelBook[i].add(surnameAuthor[i]);
-//                panelBook[i].add(genre[i]);
-//                panelBook[i].add(btnRent[i]);
-//                // add panel to the external panel
-//                panel.add(panelBook[i]);
-//                System.out.println("final for");
-//                yAxis += 30;
-//            }
-//            jScrollPane1.setViewportView(panel);
-//            this.validate();
-//            this.repaint();
-//        } catch (Exception e) {
-//            
-//        }
-//    }
-    
-    
-    
-    
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        controller.sortTable(jComboBox1.getSelectedItem().toString(), this.library);
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back;
     private javax.swing.JPanel background;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable;
     private javax.swing.JLabel logo;
     // End of variables declaration//GEN-END:variables
 
-    private void genVariables2(ArrayList<Book> library) {
-        
-    }
-
     private void setTable(ArrayList<Book> library) {
         DefaultTableModel infoTableModel = (DefaultTableModel) jTable.getModel();
         infoTableModel.setRowCount(0);
-        
-        for(int i=1; i< library.size(); i++){
+
+        for (int i = 0; i < library.size(); i++) {
             rowInfoData[0] = library.get(i).getBookTitle();
             rowInfoData[1] = library.get(i).getAuthorFirstName();
             rowInfoData[2] = library.get(i).getAuthorLastName();
             rowInfoData[3] = library.get(i).getGenre();
-            
+
             infoTableModel.addRow(rowInfoData);
         }
-        System.out.println(infoTableModel.getRowCount());
-        
     }
+
+    public void setjTableSortedName(JTable jTable) {
+        this.jTable = jTable;
+        jScrollPane1.setViewportView(jTable);
+    }
+
 }

@@ -10,16 +10,13 @@ package model;
  */
 public class Book {
     private String idBook;
-    private String authorFirstName;
-    private String authorLastName;
-    private String bookTitle;
-    private String genre;
-
-    public Book(String id, String authorFirstName, String authorLastName, String booTitle, String genre) {
+    private String authorFirstName, authorLastName, bookTitle, genre;
+    
+    public Book(String id, String authorFirstName, String authorLastName, String bookTitle, String genre) {
         this.idBook = id;
         this.authorFirstName = authorFirstName;
         this.authorLastName = authorLastName;
-        this.bookTitle = booTitle;
+        this.bookTitle = bookTitle;
         this.genre = genre;
     }
 
