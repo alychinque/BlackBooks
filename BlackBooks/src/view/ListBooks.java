@@ -79,9 +79,10 @@ public class ListBooks extends javax.swing.JFrame {
                 "Title", "Author's name", "Author's surname", "Genre"
             }
         ));
+        jTable.setEnabled(false);
         jScrollPane1.setViewportView(jTable);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "title", "name", "surname" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "title", "name", "surname", "genre" }));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
@@ -89,6 +90,8 @@ public class ListBooks extends javax.swing.JFrame {
         });
 
         jLabel1.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 153, 153));
         jLabel1.setText("Order by:");
 
         javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
@@ -104,7 +107,7 @@ public class ListBooks extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(4, 4, 4)
                         .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 1, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(back)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)))
