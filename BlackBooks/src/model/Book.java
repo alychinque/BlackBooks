@@ -9,8 +9,7 @@ package model;
  * @author alychinque
  */
 public class Book {
-    private String idBook;
-    private String authorFirstName, authorLastName, bookTitle, genre;
+    private String idBook, authorFirstName, authorLastName, bookTitle, genre;
     
     public Book(String id, String authorFirstName, String authorLastName, String bookTitle, String genre) {
         this.idBook = id;
