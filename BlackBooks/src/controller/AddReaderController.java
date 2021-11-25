@@ -4,9 +4,16 @@
  */
 package controller;
 
+import com.opencsv.CSVWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import model.Reader;
 import view.AddReader;
 import view.Readers;
 
@@ -17,6 +24,7 @@ import view.Readers;
 public class AddReaderController {
     
     private final AddReader view;
+    private Reader reader;
     
     public AddReaderController(AddReader view){
         this.view = view;
@@ -33,8 +41,21 @@ public class AddReaderController {
         return validName(readerName) && valiSurname(readerSurname) && validEmail(readerEmail) && validAddress(readerAddress) && validPhone(readerPhone);
     }
 
-    public void addReader(JTextField readerName, JTextField readerSurname, JTextField readerEmail, JTextField readerAddress, JTextField readerPhone) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void addReader(JTextField readerName, JTextField readerSurname, JTextField readerEmail, JTextField readerAddress, JTextField readerPhone) throws IOException {
+        reader = new Reader(readerName.getText(), readerSurname.getText(), readerEmail.getText(), readerAddress.getText(), Integer.parseInt(readerPhone.getText()));
+        
+        CSVWriter csvWriter = new CSVWriter(new FileWriter("src/Data/READER_DATA.csv"));
+ 
+        List<String[]> row = new LinkedList<String[]>();
+        row.add(new String[]{reader.getIdReader(), readerName.getText(), readerSurname.getText(), readerEmail.getText(), readerAddress.getText(), readerPhone.getText()});
+        
+        csvWriter.writeAll(row);
+ 
+        csvWriter.close();
+        
+        JOptionPane.showMessageDialog(null, readerName.getText() + " has been successfully added");
+        back();
+        
     }
 
     private boolean validName(JTextField readerName) {
