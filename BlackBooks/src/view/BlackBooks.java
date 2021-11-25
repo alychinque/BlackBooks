@@ -6,7 +6,10 @@ package view;
 
 import controller.BlackBooksController;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import model.Book;
+import model.Reader;
 
 /**
  *
@@ -16,6 +19,7 @@ public class BlackBooks extends javax.swing.JFrame {
     
     private final BlackBooksController controller;
     private ArrayList<Book> library = new ArrayList<>();
+    private Map<String, Reader> readers = new HashMap<>();
 
     /**
      * Creates new form BlackBooks
@@ -24,6 +28,7 @@ public class BlackBooks extends javax.swing.JFrame {
         initComponents();
         controller = new BlackBooksController(this);
         this.library = controller.retriveLibraryData();
+        this.readers = controller.retriveReadersData();
     }
     
     /**
@@ -202,7 +207,7 @@ public class BlackBooks extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonReadersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReadersActionPerformed
-        // TODO add your handling code here:
+        controller.goReaders(this.readers);
     }//GEN-LAST:event_jButtonReadersActionPerformed
 
     private void jButtonListBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListBooksActionPerformed
