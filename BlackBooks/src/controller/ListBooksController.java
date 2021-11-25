@@ -7,9 +7,7 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.table.DefaultTableModel;
@@ -62,10 +60,16 @@ public class ListBooksController implements ActionListener {
             case "surname":
                 column = 2;
                 break;
+            case "genre":
+                column = 3;
+                break;
         }
-        System.out.println(selected);
         String[] columns = new String[]{"Title", "Author's name", "Author's surname", "Genre"};
-        table = new javax.swing.JTable();
+        table = new javax.swing.JTable(){
+            public boolean editCellAt(int row, int column, java.util.EventObject e) {
+                return false;
+            };
+        };
         Object rowInfoData[] = new Object[4];
         table.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{
