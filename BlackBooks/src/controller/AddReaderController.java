@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import model.Reader;
 import view.AddReader;
+import view.BlackBooks;
 import view.Readers;
 
 /**
@@ -22,15 +23,14 @@ import view.Readers;
  * @author alychinque
  */
 public class AddReaderController {
-    
+
     private final AddReader view;
     private Reader reader;
-    
-    public AddReaderController(AddReader view){
+
+    public AddReaderController(AddReader view) {
         this.view = view;
     }
-    
-    
+
     public void back() {
         Readers rd = new Readers();
         this.view.dispose();
@@ -42,24 +42,34 @@ public class AddReaderController {
     }
 
     public void addReader(JTextField readerName, JTextField readerSurname, JTextField readerEmail, JTextField readerAddress, JTextField readerPhone) throws IOException {
-        reader = new Reader(readerName.getText(), readerSurname.getText(), readerEmail.getText(), readerAddress.getText(), Integer.parseInt(readerPhone.getText()));
-        
-        CSVWriter csvWriter = new CSVWriter(new FileWriter("src/Data/READER_DATA.csv"));
- 
-        List<String[]> row = new LinkedList<String[]>();
-        row.add(new String[]{reader.getIdReader(), readerName.getText(), readerSurname.getText(), readerEmail.getText(), readerAddress.getText(), readerPhone.getText()});
-        
-        csvWriter.writeAll(row);
- 
+        reader = new Reader(readerName.getText(), readerSurname.getText(), readerEmail.getText(), readerAddress.getText(), readerPhone.getText());
+
+        CSVWriter csvWriter = new CSVWriter(new FileWriter("src/Data/READER_DATA.csv", true));
+        //FileWriter pw = new FileWriter("src/Data/READER_DATA.csv",true);
+
+        //List<String[]> row = new LinkedList<String[]>();
+        //row.add(new String[]{reader.getIdReader(), readerName.getText(), readerSurname.getText(), readerEmail.getText(), readerAddress.getText(), readerPhone.getText()});
+        String row[] = new String[6];
+        row[0] = reader.getIdReader();
+        row[1] = reader.getReaderName();
+        row[2] = reader.getReaderSurname();
+        row[3] = reader.getReaderEmail();
+        row[4] = reader.getReaderAddress();
+        row[5] = reader.getPhone();
+
+        csvWriter.writeNext(row);
+
         csvWriter.close();
-        
+
         JOptionPane.showMessageDialog(null, readerName.getText() + " has been successfully added");
-        back();
-        
+        BlackBooks bl = new BlackBooks();
+        this.view.dispose();
+        bl.setVisible(true);
+
     }
 
-    private boolean validName(JTextField readerName) {
-         try {
+    private boolean validName(JTextField readerName) { 
+        try {
             String name = readerName.getText();
             if (!name.isEmpty()) {
                 return true;
