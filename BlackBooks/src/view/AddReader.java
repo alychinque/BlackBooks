@@ -5,6 +5,9 @@
 package view;
 
 import controller.AddReaderController;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -197,7 +200,11 @@ public class AddReader extends javax.swing.JFrame {
 
     private void jButtonWaitingListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonWaitingListActionPerformed
         if(controller.checkVariables(readerName, readerSurname, readerEmail, readerAddress, readerPhone)){
-            controller.addReader(readerName, readerSurname, readerEmail, readerAddress, readerPhone);
+            try {
+                controller.addReader(readerName, readerSurname, readerEmail, readerAddress, readerPhone);
+            } catch (IOException ex) {
+                Logger.getLogger(AddReader.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }//GEN-LAST:event_jButtonWaitingListActionPerformed
 
