@@ -4,23 +4,40 @@
  */
 package model;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+
 /**
  *
  * @author alychinque
  */
 public class Reader {
-    private static int idCounter = 1001;
+    private static int idCounter = 1000;
     private String idReader, readerName, readerSurname, readerEmail, readerAddress;
-    private int phone;
+    private String phone;
 
-    public Reader(String readerName, String readerSurname, String readerEmail, String readerAddress, int phone) {
+    public Reader(String readerName, String readerSurname, String readerEmail, String readerAddress, String phone) {
+        idCounter++;
         this.idReader = "BLK" + idCounter;
         this.readerName = readerName;
         this.readerSurname = readerSurname;
         this.readerEmail = readerEmail;
         this.readerAddress = readerAddress;
         this.phone = phone;
-        idCounter++;
+    }
+    
+    public Reader(String readerId, String readerName, String readerSurname, String readerEmail, String readerAddress, String phone) {
+        this.idReader = readerId;
+        this.readerName = readerName;
+        this.readerSurname = readerSurname;
+        this.readerEmail = readerEmail;
+        this.readerAddress = readerAddress;
+        this.phone = phone;
+    }
+    
+    public static void setIdCounter(String newIdCounter){
+        int auxIdCounter = Integer.parseInt(newIdCounter.substring(4, 8));
+        idCounter = auxIdCounter;
     }
 
     public String getIdReader() {
@@ -59,14 +76,18 @@ public class Reader {
         this.readerAddress = readerAddress;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
     
+    @Override
+    public String toString(){
+        return this.readerName;
+    }
     
     
 }
