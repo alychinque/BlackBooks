@@ -6,8 +6,6 @@ package view;
 
 import controller.ReadersController;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import javax.swing.JOptionPane;
 import model.Reader;
 
@@ -18,7 +16,7 @@ import model.Reader;
 public class Readers extends javax.swing.JFrame {
 
     private final ReadersController controller;
-    private Map<String, Reader> readers = new HashMap<>();
+    private ArrayList<Reader> readers = new ArrayList<>();
     
     /**
      * Creates new form Reader
@@ -28,7 +26,7 @@ public class Readers extends javax.swing.JFrame {
         this.controller = new ReadersController(this);
     }
 
-    public Readers(Map<String, Reader> readers) {
+    public Readers(ArrayList<Reader> readers) {
         initComponents();
         this.controller = new ReadersController(this);
         this.readers = readers;

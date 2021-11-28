@@ -6,8 +6,6 @@ package view;
 
 import controller.BlackBooksController;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import model.Book;
 import model.Reader;
 
@@ -19,7 +17,7 @@ public class BlackBooks extends javax.swing.JFrame {
     
     private final BlackBooksController controller;
     private ArrayList<Book> library = new ArrayList<>();
-    private Map<String, Reader> readers = new HashMap<>();
+    private ArrayList<Reader> readers = new ArrayList<>();
 
     /**
      * Creates new form BlackBooks
@@ -27,17 +25,14 @@ public class BlackBooks extends javax.swing.JFrame {
     public BlackBooks() {
         initComponents();
         controller = new BlackBooksController(this);
-        this.library = controller.retriveLibraryData();
         this.readers = controller.retriveReadersData();
+        this.library = controller.retriveLibraryData();
+//        for (int i=0; i< readers.size();i++){
+////            System.out.println("id: "+readers.get(i).getIdReader()+" name: "+readers.get(i).getReaderName()+" surname: "+readers.get(i).getReaderSurname()+" email : "+readers.get(i).getReaderEmail()+" address: "+readers.get(i).getReaderAddress()+" phone: "+ readers.get(i).getPhone());
+//            System.out.println(readers.get(i));
+//        }
     }
     
-    /**
-     * Creates new Constructor
-     */
-    public BlackBooks(int id) {
-        initComponents();
-        controller = new BlackBooksController(this);
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

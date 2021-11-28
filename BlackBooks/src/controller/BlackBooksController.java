@@ -7,7 +7,6 @@ package controller;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import model.Book;
@@ -24,7 +23,7 @@ public class BlackBooksController {
 
     private final BlackBooks view;
     private ArrayList<Book> library = new ArrayList<>();
-    private Map<String, Reader> readers = new HashMap<>();
+    private ArrayList<Reader> readers = new ArrayList<>();
     private Book book;
     private Reader reader;
 
@@ -63,7 +62,7 @@ public class BlackBooksController {
             return library;
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Receiving data failed");
+            JOptionPane.showMessageDialog(null, "Receiving library data failed");
             return null;
         }
     }
@@ -75,31 +74,38 @@ public class BlackBooksController {
         lisBooks.setVisible(true);
     }
 
-    public Map<String, Reader> retriveReadersData() {
+    public ArrayList<Reader> retriveReadersData() {
         try {
             BufferedReader csvReader = new BufferedReader(new FileReader("src/Data/READER_DATA.csv"));
             String row;
+            int i = 0;
             while ((row = csvReader.readLine()) != null) {
                 String[] data = row.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
-                String idReader = data[0];
-                String readerName = data[1];
-                String readerSurname = data[2];
-                String readerEmail = data[3];
-                String readerAddress = data[4];
-                int phone = Integer.parseInt(data[5]);
-                reader = new Reader(readerName, readerSurname, readerEmail, readerAddress, phone);
-                this.readers.put(idReader, reader);
+                if (i != 0) {
+                    String idReader = data[0];
+                    String readerName = data[1];
+                    String readerSurname = data[2];
+                    String readerEmail = data[3];
+                    String readerAddress = data[4];
+                    String phone = data[5];
+                    reader = new Reader(idReader, readerName, readerSurname, readerEmail, readerAddress, phone);
+                    this.readers.add(reader);
+                    Reader.setIdCounter(idReader);
+                    System.out.println(readers);
+                }
+                i++;
             }
             csvReader.close();
+            System.out.println(readers);
             return readers;
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Receiving data failed");
+            JOptionPane.showMessageDialog(null, "Receiving reader data failed");
             return null;
         }
     }
 
-    public void goReaders(Map<String, Reader> readers) {
+    public void goReaders(ArrayList<Reader> readers) {
         Readers rd = new Readers(readers);
         this.view.dispose();
         rd.setVisible(true);

@@ -4,7 +4,7 @@
  */
 package controller;
 
-import java.util.Map;
+import java.util.ArrayList;
 import model.Reader;
 import view.AddReader;
 import view.BlackBooks;
@@ -35,7 +35,7 @@ public class ReadersController {
         ar.setVisible(true);
     }
 
-    public void goListReaders(Map<String, Reader> readers) {
+    public void goListReaders(ArrayList<Reader> readers) {
         ListReaders lr = new ListReaders(readers);
         this.view.dispose();
         lr.setVisible(true);
