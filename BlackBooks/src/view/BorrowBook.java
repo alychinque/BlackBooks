@@ -5,10 +5,14 @@
 package view;
 
 import controller.BorrowBookController;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Book;
+import model.Borrow;
 import model.Reader;
 
 /**
@@ -22,6 +26,7 @@ public class BorrowBook extends javax.swing.JFrame {
     private final ArrayList<Book> library;
     private String[] books;
     private String[] readerName;
+    private ArrayList<Borrow> listOfBorrowedBooks = new ArrayList<>();
 
     /**
      * Creates new form RentBook
@@ -35,7 +40,13 @@ public class BorrowBook extends javax.swing.JFrame {
         this.controller = new BorrowBookController(this);
         this.readers = readers;
         this.library = library;
+        jButtonBorrowBook.setEnabled(true);
         setBookjComboBox();
+        this.listOfBorrowedBooks = controller.getBorrowedBooks();
+    }
+
+    public ArrayList<Borrow> getListOfBorrowedBooks() {
+        return listOfBorrowedBooks;
     }
 
     /**
@@ -56,6 +67,7 @@ public class BorrowBook extends javax.swing.JFrame {
         jComboBoxReaders = new javax.swing.JComboBox<>();
         jButtonBorrowBook = new javax.swing.JButton();
         back = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         jButtonReturnBook1.setBackground(new java.awt.Color(255, 255, 0));
         jButtonReturnBook1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -96,6 +108,7 @@ public class BorrowBook extends javax.swing.JFrame {
         jButtonBorrowBook.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jButtonBorrowBook.setForeground(new java.awt.Color(0, 0, 0));
         jButtonBorrowBook.setText("Borrow Book");
+        jButtonBorrowBook.setEnabled(false);
         jButtonBorrowBook.setMaximumSize(new java.awt.Dimension(160, 50));
         jButtonBorrowBook.setMinimumSize(new java.awt.Dimension(160, 50));
         jButtonBorrowBook.setPreferredSize(new java.awt.Dimension(160, 50));
@@ -111,6 +124,9 @@ public class BorrowBook extends javax.swing.JFrame {
                 backActionPerformed(evt);
             }
         });
+
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 0, 0));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -136,7 +152,10 @@ public class BorrowBook extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jComboBoxReaders, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jComboBoxBooks, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jComboBoxBooks, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(130, 130, 130)))))
                 .addContainerGap(160, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -155,7 +174,9 @@ public class BorrowBook extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(55, 55, 55)
                         .addComponent(jComboBoxBooks, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(59, 59, 59)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
                 .addComponent(jButtonBorrowBook, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(back)
@@ -174,11 +195,15 @@ public class BorrowBook extends javax.swing.JFrame {
 
     private void jButtonBorrowBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBorrowBookActionPerformed
         if (JOptionPane.showConfirmDialog(rootPane, "Reader: " + jComboBoxReaders.getSelectedItem()
-                +"\nBook: " + jComboBoxBooks.getSelectedItem()
-                +"\nAre you sure?", "WARNING",
+                + "\nBook: " + jComboBoxBooks.getSelectedItem()
+                + "\nAre you sure?", "WARNING",
                 JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-            // yes option
-            controller.borrowBook( jComboBoxReaders.getSelectedItem() , jComboBoxBooks.getSelectedItem() );
+            try {
+                // yes option
+                controller.borrowBook(jComboBoxReaders.getSelectedItem(), jComboBoxBooks.getSelectedItem());
+            } catch (IOException ex) {
+                Logger.getLogger(BorrowBook.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             // no option
         }
@@ -191,10 +216,10 @@ public class BorrowBook extends javax.swing.JFrame {
         convertArray(library, readers);
         jComboBoxBooks.setModel(new javax.swing.DefaultComboBoxModel<>(books));
         jComboBoxReaders.setModel(new javax.swing.DefaultComboBoxModel<>(readerName));
-        
+
         jComboBoxBooks.addActionListener(controller);
         jComboBoxBooks.setActionCommand("book");
-        
+
         jComboBoxReaders.addActionListener(controller);
         jComboBoxReaders.setActionCommand("reader");
     }
@@ -209,7 +234,7 @@ public class BorrowBook extends javax.swing.JFrame {
             readerName[i] = readers.get(i).getReaderName() + " " + readers.get(i).getReaderSurname();
         }
         Arrays.sort(books);
-        Arrays.sort(readerName);        
+        Arrays.sort(readerName);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -220,7 +245,21 @@ public class BorrowBook extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> jComboBoxReaders;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel logo;
     // End of variables declaration//GEN-END:variables
+
+    public void setButtonEnable(boolean lent) {
+        jButtonBorrowBook.setEnabled(lent);
+        setLabel(lent);
+    }
+
+    private void setLabel(boolean lent) {
+        if (!lent) {
+            jLabel3.setText("This book is rented");
+        } else {
+            jLabel3.setText("");
+        }
+    }
 }
