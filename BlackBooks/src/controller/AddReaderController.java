@@ -7,9 +7,6 @@ package controller;
 import com.opencsv.CSVWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -42,13 +39,9 @@ public class AddReaderController {
     }
 
     public void addReader(JTextField readerName, JTextField readerSurname, JTextField readerEmail, JTextField readerAddress, JTextField readerPhone) throws IOException {
-        reader = new Reader(readerName.getText(), readerSurname.getText(), readerEmail.getText(), readerAddress.getText(), readerPhone.getText());
+        reader = new Reader(readerName.getText().trim(), readerSurname.getText().trim(), readerEmail.getText().trim(), readerAddress.getText().trim(), readerPhone.getText().trim());
 
         CSVWriter csvWriter = new CSVWriter(new FileWriter("src/Data/READER_DATA.csv", true));
-        //FileWriter pw = new FileWriter("src/Data/READER_DATA.csv",true);
-
-        //List<String[]> row = new LinkedList<String[]>();
-        //row.add(new String[]{reader.getIdReader(), readerName.getText(), readerSurname.getText(), readerEmail.getText(), readerAddress.getText(), readerPhone.getText()});
         String row[] = new String[6];
         row[0] = reader.getIdReader();
         row[1] = reader.getReaderName();
@@ -57,7 +50,7 @@ public class AddReaderController {
         row[4] = reader.getReaderAddress();
         row[5] = reader.getPhone();
 
-        csvWriter.writeNext(row);
+        csvWriter.writeNext(row, false);
 
         csvWriter.close();
 
@@ -71,11 +64,12 @@ public class AddReaderController {
     private boolean validName(JTextField readerName) { 
         try {
             String name = readerName.getText();
-            if (!name.isEmpty()) {
-                return true;
-            } else {
-                JOptionPane.showMessageDialog(null, "Failed!\nPlease enter name!");
+            System.out.println(name.contains(","));
+            if (name.isEmpty() || name.contains(",")) {
+                JOptionPane.showMessageDialog(null, "Failed!\nPlease enter name, no commas!");
                 return false;
+            } else {
+                return true;
             }
 
         } catch (Exception e) {
@@ -87,11 +81,11 @@ public class AddReaderController {
     private boolean valiSurname(JTextField readerSurname) {
         try {
             String surname = readerSurname.getText();
-            if (!surname.isEmpty()) {
-                return true;
-            } else {
-                JOptionPane.showMessageDialog(null, "Failed!\nPlease enter surname!");
+            if (surname.isEmpty() || surname.contains(",")) {
+                JOptionPane.showMessageDialog(null, "Failed!\nPlease enter surname, no commas!");
                 return false;
+            } else {
+                return true;
             }
 
         } catch (Exception e) {
@@ -109,11 +103,10 @@ public class AddReaderController {
                     + "A-Z]{2,7}$";
 
             Pattern pat = Pattern.compile(emailRegex);
-            if (email == null) {
-                JOptionPane.showMessageDialog(null, "Email field is empty!\nPlease enter an email!");
+            if (email == null || email.contains(",")) {
+                JOptionPane.showMessageDialog(null, "Email field is empty or contains comma!\nPlease enter an email!");
                 return false;
-            }
-            if (pat.matcher(email).matches() == true) {
+            } else if (pat.matcher(email).matches() == true) {
                 return true;
             } else {
                 JOptionPane.showMessageDialog(null, "Email is not valid!\nPlease enter again!");
@@ -127,10 +120,10 @@ public class AddReaderController {
 
     private boolean validAddress(JTextField readerAddress) {
         String address = readerAddress.getText();
-        if (address.length() > 5){
+        if (address.length() > 5 && !address.contains(",")){
             return true;
         } else {
-            JOptionPane.showMessageDialog(null, "Addresses must have at least 5 characters to be valid");
+            JOptionPane.showMessageDialog(null, "Addresses must have at least 5 characters to be valid and not contain comma");
             return false;
         }
     }
