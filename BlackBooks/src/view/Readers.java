@@ -78,7 +78,7 @@ public class Readers extends javax.swing.JFrame {
         jButtonListReader.setBackground(new java.awt.Color(255, 255, 0));
         jButtonListReader.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jButtonListReader.setForeground(new java.awt.Color(0, 0, 0));
-        jButtonListReader.setText("List Readers");
+        jButtonListReader.setText("List Readers / Edit / Delete");
         jButtonListReader.setMaximumSize(new java.awt.Dimension(160, 50));
         jButtonListReader.setMinimumSize(new java.awt.Dimension(160, 50));
         jButtonListReader.setPreferredSize(new java.awt.Dimension(160, 50));
@@ -128,7 +128,7 @@ public class Readers extends javax.swing.JFrame {
                 .addGap(142, 142, 142)
                 .addComponent(jButtonAddReader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonListReader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonListReader, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(134, 134, 134))
         );
         jPanel1Layout.setVerticalGroup(

@@ -87,7 +87,7 @@
                   <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
                   <Component id="jButtonAddReader" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jButtonListReader" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonListReader" min="-2" pref="279" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="134" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -158,7 +158,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="List Readers"/>
+            <Property name="text" type="java.lang.String" value="List Readers / Edit / Delete"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[160, 50]"/>
             </Property>
