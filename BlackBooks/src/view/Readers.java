@@ -16,7 +16,7 @@ import model.Reader;
 public class Readers extends javax.swing.JFrame {
 
     private final ReadersController controller;
-    private ArrayList<Reader> readers = new ArrayList<>();
+    private static ArrayList<Reader> readers = new ArrayList<>();
     
     /**
      * Creates new form Reader
@@ -45,17 +45,14 @@ public class Readers extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         logo = new javax.swing.JLabel();
         jButtonAddReader = new javax.swing.JButton();
-        jButtonEditReader = new javax.swing.JButton();
-        jButtonDeleteReader = new javax.swing.JButton();
         jButtonListReader = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jTextFieldIdReader = new javax.swing.JTextField();
-        jTextFieldNameReader = new javax.swing.JTextField();
-        jLabelidReader = new javax.swing.JLabel();
+        jButtonName = new javax.swing.JButton();
+        nameReader = new javax.swing.JTextField();
         jLabelNameReader = new javax.swing.JLabel();
         back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(800, 500));
         setMinimumSize(new java.awt.Dimension(800, 500));
         setResizable(false);
 
@@ -78,31 +75,6 @@ public class Readers extends javax.swing.JFrame {
             }
         });
 
-        jButtonEditReader.setBackground(new java.awt.Color(0, 204, 0));
-        jButtonEditReader.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jButtonEditReader.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonEditReader.setText("Edit Reader");
-        jButtonEditReader.setMaximumSize(new java.awt.Dimension(160, 50));
-        jButtonEditReader.setMinimumSize(new java.awt.Dimension(160, 50));
-        jButtonEditReader.setPreferredSize(new java.awt.Dimension(160, 50));
-        jButtonEditReader.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEditReaderActionPerformed(evt);
-            }
-        });
-
-        jButtonDeleteReader.setBackground(new java.awt.Color(204, 0, 0));
-        jButtonDeleteReader.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jButtonDeleteReader.setText("Del Reader");
-        jButtonDeleteReader.setMaximumSize(new java.awt.Dimension(160, 50));
-        jButtonDeleteReader.setMinimumSize(new java.awt.Dimension(160, 50));
-        jButtonDeleteReader.setPreferredSize(new java.awt.Dimension(160, 50));
-        jButtonDeleteReader.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDeleteReaderActionPerformed(evt);
-            }
-        });
-
         jButtonListReader.setBackground(new java.awt.Color(255, 255, 0));
         jButtonListReader.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jButtonListReader.setForeground(new java.awt.Color(0, 0, 0));
@@ -116,13 +88,9 @@ public class Readers extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(255, 153, 51));
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("Search");
-
-        jLabelidReader.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jLabelidReader.setForeground(new java.awt.Color(204, 204, 204));
-        jLabelidReader.setText("ID Reader");
+        jButtonName.setBackground(new java.awt.Color(255, 153, 51));
+        jButtonName.setForeground(new java.awt.Color(0, 0, 0));
+        jButtonName.setText("Search");
 
         jLabelNameReader.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         jLabelNameReader.setForeground(new java.awt.Color(204, 204, 204));
@@ -139,63 +107,48 @@ public class Readers extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(122, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelidReader)
-                    .addComponent(jTextFieldIdReader, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelNameReader)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextFieldNameReader, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(29, 29, 29)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(82, 82, 82))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addComponent(jButtonAddReader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(80, 80, 80)
-                        .addComponent(jButtonEditReader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(80, 80, 80)
-                        .addComponent(jButtonDeleteReader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(198, 198, 198)
+                        .addGap(200, 200, 200)
                         .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(176, 176, 176)
-                        .addComponent(jButtonListReader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addComponent(back)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(38, 38, 38)
+                        .addComponent(back))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(160, 160, 160)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelNameReader)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(nameReader, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(42, 42, 42)
+                                .addComponent(jButtonName, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(163, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(142, 142, 142)
+                .addComponent(jButtonAddReader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonListReader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(134, 134, 134))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(jLabelNameReader)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelidReader)
-                    .addComponent(jLabelNameReader))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(nameReader, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonName))
+                .addGap(72, 72, 72)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldIdReader, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldNameReader, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addGap(55, 55, 55)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonAddReader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonEditReader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonDeleteReader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(70, 70, 70)
-                .addComponent(jButtonListReader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                    .addComponent(jButtonListReader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonAddReader, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
                 .addComponent(back)
-                .addGap(31, 31, 31))
+                .addGap(44, 44, 44))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -212,17 +165,6 @@ public class Readers extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonEditReaderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditReaderActionPerformed
-    }//GEN-LAST:event_jButtonEditReaderActionPerformed
-
-    private void jButtonAddReaderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddReaderActionPerformed
-        controller.goAddReader();
-    }//GEN-LAST:event_jButtonAddReaderActionPerformed
-
-    private void jButtonDeleteReaderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteReaderActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonDeleteReaderActionPerformed
-
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         controller.back();
     }//GEN-LAST:event_backActionPerformed
@@ -231,23 +173,23 @@ public class Readers extends javax.swing.JFrame {
         if(readers.isEmpty()){
             JOptionPane.showMessageDialog(null, "No Readers Added");
         }else{
-            controller.goListReaders(readers);
+            controller.goListReaders(this.readers);
         }
     }//GEN-LAST:event_jButtonListReaderActionPerformed
+
+    private void jButtonAddReaderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddReaderActionPerformed
+        controller.goAddReader();
+    }//GEN-LAST:event_jButtonAddReaderActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAddReader;
-    private javax.swing.JButton jButtonDeleteReader;
-    private javax.swing.JButton jButtonEditReader;
     private javax.swing.JButton jButtonListReader;
+    private javax.swing.JButton jButtonName;
     private javax.swing.JLabel jLabelNameReader;
-    private javax.swing.JLabel jLabelidReader;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextFieldIdReader;
-    private javax.swing.JTextField jTextFieldNameReader;
     private javax.swing.JLabel logo;
+    private javax.swing.JTextField nameReader;
     // End of variables declaration//GEN-END:variables
 }
