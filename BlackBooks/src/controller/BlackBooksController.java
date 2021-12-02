@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import model.Book;
 import model.Reader;
 import view.BlackBooks;
+import view.BorrowBook;
 import view.ListBooks;
 import view.Readers;
 
@@ -80,7 +81,7 @@ public class BlackBooksController {
             String row;
             int i = 0;
             while ((row = csvReader.readLine()) != null) {
-                String[] data = row.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", -1);
+                String[] data = row.split(",");
                 if (i != 0) {
                     String idReader = data[0];
                     String readerName = data[1];
@@ -91,12 +92,10 @@ public class BlackBooksController {
                     reader = new Reader(idReader, readerName, readerSurname, readerEmail, readerAddress, phone);
                     this.readers.add(reader);
                     Reader.setIdCounter(idReader);
-                    System.out.println(readers);
                 }
                 i++;
             }
             csvReader.close();
-            System.out.println(readers);
             return readers;
 
         } catch (Exception e) {
@@ -109,5 +108,11 @@ public class BlackBooksController {
         Readers rd = new Readers(readers);
         this.view.dispose();
         rd.setVisible(true);
+    }
+
+    public void goBorrowBook(ArrayList<Reader> readers, ArrayList<Book> library) {
+        BorrowBook bb = new BorrowBook(readers, library);
+        this.view.dispose();
+        bb.setVisible(true);
     }
 }
