@@ -36,7 +36,7 @@ public class Reader {
     }
     
     public static void setIdCounter(String newIdCounter){
-        int auxIdCounter = Integer.parseInt(newIdCounter.substring(4, 8));
+        int auxIdCounter = Integer.parseInt(newIdCounter.substring(3, 7));
         idCounter = auxIdCounter;
     }
 
