@@ -26,11 +26,7 @@ public class BlackBooks extends javax.swing.JFrame {
         initComponents();
         controller = new BlackBooksController(this);
         this.readers = controller.retriveReadersData();
-        this.library = controller.retriveLibraryData();
-//        for (int i=0; i< readers.size();i++){
-////            System.out.println("id: "+readers.get(i).getIdReader()+" name: "+readers.get(i).getReaderName()+" surname: "+readers.get(i).getReaderSurname()+" email : "+readers.get(i).getReaderEmail()+" address: "+readers.get(i).getReaderAddress()+" phone: "+ readers.get(i).getPhone());
-//            System.out.println(readers.get(i));
-//        }
+//        this.library = controller.retriveLibraryData();
     }
     
     /**

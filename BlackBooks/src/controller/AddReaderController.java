@@ -64,7 +64,6 @@ public class AddReaderController {
     private boolean validName(JTextField readerName) { 
         try {
             String name = readerName.getText();
-            System.out.println(name.contains(","));
             if (name.isEmpty() || name.contains(",")) {
                 JOptionPane.showMessageDialog(null, "Failed!\nPlease enter name, no commas!");
                 return false;

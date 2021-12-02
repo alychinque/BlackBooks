@@ -13,8 +13,7 @@ import java.io.FileReader;
  */
 public class Reader {
     private static int idCounter = 1000;
-    private String idReader, readerName, readerSurname, readerEmail, readerAddress;
-    private String phone;
+    private String idReader, readerName, readerSurname, readerEmail, readerAddress, phone;
 
     public Reader(String readerName, String readerSurname, String readerEmail, String readerAddress, String phone) {
         idCounter++;

@@ -5,16 +5,13 @@
         <group>
             <file>file:/home/alychinque/Documents/GitHub/BlackBooks/BlackBooks/src/view/ListReaders.java</file>
             <file>file:/home/alychinque/Documents/GitHub/BlackBooks/BlackBooks/src/controller/BlackBooksController.java</file>
-            <file>file:/home/alychinque/Documents/GitHub/BlackBooks/BlackBooks/src/controller/EditReaderController.java</file>
             <file>file:/home/alychinque/Documents/GitHub/BlackBooks/BlackBooks/src/controller/BorrowBookController.java</file>
             <file>file:/home/alychinque/Documents/GitHub/BlackBooks/BlackBooks/src/view/BorrowBook.java</file>
-            <file>file:/home/alychinque/Documents/GitHub/BlackBooks/BlackBooks/src/controller/ReadersController.java</file>
-            <file>file:/home/alychinque/Documents/GitHub/BlackBooks/BlackBooks/src/view/ListBooks.java</file>
-            <file>file:/home/alychinque/Documents/GitHub/BlackBooks/BlackBooks/src/controller/ListBooksController.java</file>
-            <file>file:/home/alychinque/Documents/GitHub/BlackBooks/BlackBooks/src/view/Readers.java</file>
+            <file>file:/home/alychinque/Documents/GitHub/BlackBooks/BlackBooks/src/controller/ListReadersController.java</file>
+            <file>file:/home/alychinque/Documents/GitHub/BlackBooks/BlackBooks/src/Data/BORROW_DATA.csv</file>
             <file>file:/home/alychinque/Documents/GitHub/BlackBooks/BlackBooks/src/controller/AddReaderController.java</file>
-            <file>file:/home/alychinque/Documents/GitHub/BlackBooks/BlackBooks/src/view/BlackBooks.java</file>
-            <file>file:/home/alychinque/Documents/GitHub/BlackBooks/BlackBooks/src/Data/MOCK_DATA.csv</file>
+            <file>file:/home/alychinque/Documents/GitHub/BlackBooks/BlackBooks/src/model/Book.java</file>
+            <file>file:/home/alychinque/Documents/GitHub/BlackBooks/BlackBooks/src/model/Borrow.java</file>
         </group>
     </open-files>
 </project-private>
