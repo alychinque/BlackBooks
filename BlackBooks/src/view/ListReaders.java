@@ -20,7 +20,7 @@ public class ListReaders extends javax.swing.JFrame {
     private final ListReadersController controller;
     private final ArrayList<Reader> readers;
     Object rowInfoData[] = new Object[6];
-    
+
     /**
      * Creates new form ListReaders
      */
@@ -35,7 +35,7 @@ public class ListReaders extends javax.swing.JFrame {
         controller = new ListReadersController(this);
         this.readers = readers;
         this.setTable(this.readers);
-        
+
     }
 
     /**
@@ -194,8 +194,8 @@ public class ListReaders extends javax.swing.JFrame {
     }//GEN-LAST:event_backActionPerformed
 
     private void jButtonEditrReaderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditrReaderActionPerformed
-        if(idReader.getText().equals("")){
-            JOptionPane.showMessageDialog(null, "Please enter Reader's ID!");
+        if (idReader.getText().equals("")) {
+            JOptionPane.showMessageDialog(rootPane, "Please enter Reader's ID!");
         } else {
             int index = controller.getReader(idReader.getText(), this.readers);
             controller.goEditReader(index, this.readers);
@@ -203,7 +203,23 @@ public class ListReaders extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonEditrReaderActionPerformed
 
     private void jButtonDeleteReaderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteReaderActionPerformed
-        // TODO add your handling code here:
+        if (idReader.getText().equals("")) {
+            JOptionPane.showMessageDialog(rootPane, "Please enter Reader's ID!");
+        } else {
+            int index = controller.getReader(idReader.getText(), this.readers);
+            if (JOptionPane.showConfirmDialog(rootPane, "Reader: " + this.readers.get(index).getReaderName() + " " + this.readers.get(index).getReaderSurname()
+                    + "\nID: " + this.readers.get(index).getIdReader()
+                    + "\nAre you sure you want delete this reader?", "WARNING",
+                    JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                // yes option
+                controller.deleteReader(idReader.getText());
+                JOptionPane.showMessageDialog(rootPane, "Reader Deleted");
+
+            } else {
+                // no option
+                JOptionPane.showMessageDialog(rootPane, "Aborted!");
+            }
+        }
     }//GEN-LAST:event_jButtonDeleteReaderActionPerformed
 
     private void idReaderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idReaderActionPerformed
@@ -226,7 +242,7 @@ public class ListReaders extends javax.swing.JFrame {
     private void setTable(ArrayList<Reader> readers) {
         DefaultTableModel infoTableModel = (DefaultTableModel) jTable.getModel();
         infoTableModel.setRowCount(0);
-        
+
         for (int i = 0; i < readers.size(); i++) {
             rowInfoData[0] = readers.get(i).getIdReader();
             rowInfoData[1] = readers.get(i).getReaderName();
@@ -237,8 +253,5 @@ public class ListReaders extends javax.swing.JFrame {
 
             infoTableModel.addRow(rowInfoData);
         }
-    }
-    public void setjTableSortedName(JTable table) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -4,14 +4,15 @@
  */
 package controller;
 
+import com.opencsv.CSVWriter;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
-import javax.swing.RowSorter;
-import javax.swing.SortOrder;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.swing.table.TableRowSorter;
-import model.Book;
+import java.util.Scanner;
 import model.Reader;
+import view.BlackBooks;
 import view.EditReader;
 import view.ListReaders;
 import view.Readers;
@@ -21,10 +22,11 @@ import view.Readers;
  * @author alychinque
  */
 public class ListReadersController {
-    
+
     private final ListReaders view;
     private javax.swing.JTable table;
-    
+    private Scanner s;
+
     public ListReadersController(ListReaders view) {
         this.view = view;
     }
@@ -34,70 +36,12 @@ public class ListReadersController {
         this.view.dispose();
         rd.setVisible(true);
     }
-    
-    
-    public void sortTable(String selected, ArrayList<Book> library) {
-        int column = 0;
-        switch (selected) {
-            case "title":
-                column = 0;
-                break;
-            case "name":
-                column = 1;
-                break;
-            case "surname":
-                column = 2;
-                break;
-            case "genre":
-                column = 3;
-                break;
-        }
-        String[] columns = new String[]{"Title", "Author's name", "Author's surname", "Genre"};
-        table = new javax.swing.JTable(){
-            public boolean editCellAt(int row, int column, java.util.EventObject e) {
-                return false;
-            };
-        };
-        Object rowInfoData[] = new Object[4];
-        table.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][]{
-                    {null, null, null, null},
-                    {null, null, null, null},
-                    {null, null, null, null},
-                    {null, null, null, null}
-                },
-                new String[]{
-                    "Title", "Author's name", "Author's surname", "Genre"
-                }
-        ));
-        DefaultTableModel infoTableModel = (DefaultTableModel) table.getModel();
-        infoTableModel.setRowCount(0);
-
-        for (int i = 0; i < library.size(); i++) {
-            rowInfoData[0] = library.get(i).getBookTitle();
-            rowInfoData[1] = library.get(i).getAuthorFirstName();
-            rowInfoData[2] = library.get(i).getAuthorLastName();
-            rowInfoData[3] = library.get(i).getGenre();
-
-            infoTableModel.addRow(rowInfoData);
-        }
-
-        TableRowSorter<TableModel> s = new TableRowSorter<TableModel>(table.getModel());
-        //sort JTable rows
-        table.setRowSorter(s);
-        java.util.List<RowSorter.SortKey> sortList = new ArrayList<>(4);
-        sortList.add(new RowSorter.SortKey(column, SortOrder.ASCENDING));
-        s.setSortKeys(sortList);
-        view.setjTableSortedName(table);
-    }
 
     public int getReader(String id, ArrayList<Reader> readers) {
-        for(int i=0; i< readers.size(); i++){
-            if(readers.get(i).getIdReader().equalsIgnoreCase(id)){
-                System.out.println("returned: "+i);
+        for (int i = 0; i < readers.size(); i++) {
+            if (readers.get(i).getIdReader().equalsIgnoreCase(id)) {
                 return i;
             }
-            System.out.println(i);
         }
         return -1;
     }
@@ -107,5 +51,50 @@ public class ListReadersController {
         this.view.dispose();
         er.setVisible(true);
     }
-    
+
+    public void deleteReader(String id) {
+        String filePath = "src/Data/READER_DATA.csv";
+        String idReader = id;
+        removeRecord(filePath, idReader);
+    }
+
+    private void removeRecord(String filePath, String id) {
+        String tempFile = "temp.csv";
+        File oldFile = new File(filePath);
+        File newFile = new File(tempFile);
+        String idReader = "", readerName = "", readerSurname = "", readerEmail = "", readerAddress = "", phone = "";
+        try {
+            FileWriter fw = new FileWriter(tempFile, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            s = new Scanner(new File(filePath));
+            s.useDelimiter("[,\n]");
+            int i = 0;
+            while (s.hasNext()) {
+                if (i != 0) {
+                    idReader = s.next();
+                    readerName = s.next();
+                    readerSurname = s.next();
+                    readerEmail = s.next();
+                    readerAddress = s.next();
+                    phone = s.next();
+                    if (!idReader.equalsIgnoreCase(id)) {
+                        pw.println(idReader + "," + readerName + "," + readerSurname + "," + readerEmail + "," + readerAddress + "," + phone);
+                    }
+                }i++;
+            }
+            s.close();
+            pw.flush();
+            pw.close();
+            oldFile.delete();
+            File dump = new File(filePath);
+            newFile.renameTo(dump);
+            BlackBooks bb = new BlackBooks();
+            this.view.dispose();
+            bb.setVisible(true);
+
+        } catch (Exception e) {
+        }
+    }
+
 }
