@@ -9,11 +9,13 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import model.Book;
+import model.Borrow;
 import model.Reader;
 import view.BlackBooks;
 import view.BorrowBook;
 import view.ListBooks;
 import view.Readers;
+import view.ReturnBook;
 
 /**
  *
@@ -26,6 +28,8 @@ public class BlackBooksController {
     private ArrayList<Reader> readers = new ArrayList<>();
     private Book book;
     private Reader reader;
+    private Borrow borrow;
+    private ArrayList<Borrow> listOfBorrowedBooks = new ArrayList<>();
 
     public BlackBooksController(BlackBooks view) {
         this.view = view;
@@ -109,9 +113,40 @@ public class BlackBooksController {
         rd.setVisible(true);
     }
 
-    public void goBorrowBook(ArrayList<Reader> readers, ArrayList<Book> library) {
-        BorrowBook bb = new BorrowBook(readers, library);
+    public void goBorrowBook(ArrayList<Reader> readers, ArrayList<Book> library, ArrayList<Borrow> borrow) {
+        BorrowBook bb = new BorrowBook(readers, library, borrow);
         this.view.dispose();
         bb.setVisible(true);
+    }
+
+    public ArrayList<Borrow> retrieveBorroedBooks() {
+        try {
+            BufferedReader csvReader = new BufferedReader(new FileReader("src/Data/BORROW_DATA.csv"));
+            String row;
+            int i = 0;
+            while ((row = csvReader.readLine()) != null) {
+                String[] data = row.split(",");
+                if (i != 0) {
+                    String idReader = data[0];
+                    String titleBook = data[1];
+                    boolean lent = data[2].equalsIgnoreCase("true");
+                    borrow = new Borrow(idReader, titleBook, lent);
+                    this.listOfBorrowedBooks.add(borrow);
+                }
+                i++;
+            }
+            csvReader.close();
+            return listOfBorrowedBooks;
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Receiving list of borrowed books data failed");
+            return null;
+        }
+    }
+
+    public void goReturnBook(ArrayList<Borrow> borrow) {
+        ReturnBook rb = new ReturnBook(borrow);
+        this.view.dispose();
+        rb.setVisible(true);
     }
 }

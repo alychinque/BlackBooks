@@ -93,9 +93,9 @@
                   <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
                   <Component id="jButtonWaitingList" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
-                  <Component id="jButtonReturnBook" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonBorrowBook" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jButtonRentBook" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonReturnBook" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -124,8 +124,8 @@
                   <EmptySpace pref="73" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jButtonWaitingList" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonBorrowBook" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jButtonReturnBook" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButtonRentBook" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="101" max="-2" attributes="0"/>
               </Group>
@@ -215,7 +215,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButtonRentBook">
+        <Component class="javax.swing.JButton" name="jButtonReturnBook">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="cc" type="rgb"/>
@@ -237,8 +237,11 @@
               <Dimension value="[160, 50]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonReturnBookActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButtonReturnBook">
+        <Component class="javax.swing.JButton" name="jButtonBorrowBook">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="ff" red="ff" type="rgb"/>
@@ -261,7 +264,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonReturnBookActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonBorrowBookActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextField1">

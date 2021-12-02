@@ -3,15 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/alychinque/Documents/GitHub/BlackBooks/BlackBooks/src/view/ListReaders.java</file>
+            <file>file:/home/alychinque/Documents/GitHub/BlackBooks/BlackBooks/src/view/ReturnBook.java</file>
             <file>file:/home/alychinque/Documents/GitHub/BlackBooks/BlackBooks/src/controller/BlackBooksController.java</file>
-            <file>file:/home/alychinque/Documents/GitHub/BlackBooks/BlackBooks/src/controller/BorrowBookController.java</file>
+            <file>file:/home/alychinque/Documents/GitHub/BlackBooks/BlackBooks/src/controller/ReturnBookController.java</file>
+            <file>file:/home/alychinque/Documents/GitHub/BlackBooks/BlackBooks/src/controller/EditReaderController.java</file>
+            <file>file:/home/alychinque/Documents/GitHub/BlackBooks/BlackBooks/src/view/EditReader.java</file>
             <file>file:/home/alychinque/Documents/GitHub/BlackBooks/BlackBooks/src/view/BorrowBook.java</file>
-            <file>file:/home/alychinque/Documents/GitHub/BlackBooks/BlackBooks/src/controller/ListReadersController.java</file>
             <file>file:/home/alychinque/Documents/GitHub/BlackBooks/BlackBooks/src/Data/BORROW_DATA.csv</file>
-            <file>file:/home/alychinque/Documents/GitHub/BlackBooks/BlackBooks/src/controller/AddReaderController.java</file>
-            <file>file:/home/alychinque/Documents/GitHub/BlackBooks/BlackBooks/src/model/Book.java</file>
-            <file>file:/home/alychinque/Documents/GitHub/BlackBooks/BlackBooks/src/model/Borrow.java</file>
+            <file>file:/home/alychinque/Documents/GitHub/BlackBooks/BlackBooks/src/view/BlackBooks.java</file>
         </group>
     </open-files>
 </project-private>
