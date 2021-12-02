@@ -11,6 +11,8 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import model.Book;
+import model.Reader;
+import view.EditReader;
 import view.ListReaders;
 import view.Readers;
 
@@ -87,6 +89,23 @@ public class ListReadersController {
         sortList.add(new RowSorter.SortKey(column, SortOrder.ASCENDING));
         s.setSortKeys(sortList);
         view.setjTableSortedName(table);
+    }
+
+    public int getReader(String id, ArrayList<Reader> readers) {
+        for(int i=0; i< readers.size(); i++){
+            if(readers.get(i).getIdReader().equalsIgnoreCase(id)){
+                System.out.println("returned: "+i);
+                return i;
+            }
+            System.out.println(i);
+        }
+        return -1;
+    }
+
+    public void goEditReader(int index, ArrayList<Reader> readers) {
+        EditReader er = new EditReader(index, readers);
+        this.view.dispose();
+        er.setVisible(true);
     }
     
 }
