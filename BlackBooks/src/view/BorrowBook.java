@@ -35,14 +35,13 @@ public class BorrowBook extends javax.swing.JFrame {
 //        initComponents();
 //        this.controller = new BorrowBookController(this);
 //    }
-    public BorrowBook(ArrayList<Reader> readers, ArrayList<Book> library) {
+    public BorrowBook(ArrayList<Reader> readers, ArrayList<Book> library, ArrayList<Borrow> borrow) {
         initComponents();
         this.controller = new BorrowBookController(this);
         this.readers = readers;
         this.library = library;
-        jButtonBorrowBook.setEnabled(true);
         setBookjComboBox();
-        this.listOfBorrowedBooks = controller.getBorrowedBooks();
+        this.listOfBorrowedBooks = borrow;
     }
 
     public ArrayList<Borrow> getListOfBorrowedBooks() {
@@ -108,7 +107,6 @@ public class BorrowBook extends javax.swing.JFrame {
         jButtonBorrowBook.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jButtonBorrowBook.setForeground(new java.awt.Color(0, 0, 0));
         jButtonBorrowBook.setText("Borrow Book");
-        jButtonBorrowBook.setEnabled(false);
         jButtonBorrowBook.setMaximumSize(new java.awt.Dimension(160, 50));
         jButtonBorrowBook.setMinimumSize(new java.awt.Dimension(160, 50));
         jButtonBorrowBook.setPreferredSize(new java.awt.Dimension(160, 50));
@@ -231,7 +229,7 @@ public class BorrowBook extends javax.swing.JFrame {
         }
         readerName = new String[readers.size()];
         for (int i = 0; i < readers.size(); i++) {
-            readerName[i] = readers.get(i).getReaderName() + " " + readers.get(i).getReaderSurname();
+            readerName[i] = readers.get(i).getIdReader()+" | "+readers.get(i).getReaderName() + " " + readers.get(i).getReaderSurname();
         }
         Arrays.sort(books);
         Arrays.sort(readerName);
