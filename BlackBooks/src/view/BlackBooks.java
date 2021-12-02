@@ -68,7 +68,7 @@ public class BlackBooks extends javax.swing.JFrame {
 
         jButtonListBooks.setBackground(new java.awt.Color(0, 204, 0));
         jButtonListBooks.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jButtonListBooks.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonListBooks.setForeground(new java.awt.Color(0, 0, 0));
         jButtonListBooks.setText("List All Books");
         jButtonListBooks.setMaximumSize(new java.awt.Dimension(160, 50));
         jButtonListBooks.setMinimumSize(new java.awt.Dimension(160, 50));
@@ -81,6 +81,7 @@ public class BlackBooks extends javax.swing.JFrame {
 
         jButtonReaders.setBackground(new java.awt.Color(153, 0, 153));
         jButtonReaders.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jButtonReaders.setForeground(new java.awt.Color(0, 0, 0));
         jButtonReaders.setText("Readers");
         jButtonReaders.setMaximumSize(new java.awt.Dimension(160, 50));
         jButtonReaders.setMinimumSize(new java.awt.Dimension(160, 50));
@@ -93,6 +94,7 @@ public class BlackBooks extends javax.swing.JFrame {
 
         jButtonWaitingList.setBackground(new java.awt.Color(51, 102, 255));
         jButtonWaitingList.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jButtonWaitingList.setForeground(new java.awt.Color(0, 0, 0));
         jButtonWaitingList.setText("Waiting List");
         jButtonWaitingList.setMaximumSize(new java.awt.Dimension(160, 50));
         jButtonWaitingList.setMinimumSize(new java.awt.Dimension(160, 50));
@@ -100,6 +102,7 @@ public class BlackBooks extends javax.swing.JFrame {
 
         jButtonRentBook.setBackground(new java.awt.Color(204, 0, 0));
         jButtonRentBook.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jButtonRentBook.setForeground(new java.awt.Color(0, 0, 0));
         jButtonRentBook.setText("Return Book");
         jButtonRentBook.setMaximumSize(new java.awt.Dimension(160, 50));
         jButtonRentBook.setMinimumSize(new java.awt.Dimension(160, 50));
@@ -108,10 +111,15 @@ public class BlackBooks extends javax.swing.JFrame {
         jButtonReturnBook.setBackground(new java.awt.Color(255, 255, 0));
         jButtonReturnBook.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         jButtonReturnBook.setForeground(new java.awt.Color(0, 0, 0));
-        jButtonReturnBook.setText("Rent Book");
+        jButtonReturnBook.setText("Borrow Book");
         jButtonReturnBook.setMaximumSize(new java.awt.Dimension(160, 50));
         jButtonReturnBook.setMinimumSize(new java.awt.Dimension(160, 50));
         jButtonReturnBook.setPreferredSize(new java.awt.Dimension(160, 50));
+        jButtonReturnBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonReturnBookActionPerformed(evt);
+            }
+        });
 
         jButton1.setBackground(new java.awt.Color(255, 153, 51));
         jButton1.setForeground(new java.awt.Color(0, 0, 0));
@@ -208,6 +216,10 @@ public class BlackBooks extends javax.swing.JFrame {
     private void jButtonListBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonListBooksActionPerformed
         controller.listAllBooks(this.library);
     }//GEN-LAST:event_jButtonListBooksActionPerformed
+
+    private void jButtonReturnBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReturnBookActionPerformed
+        controller.goBorrowBook(this.readers, this.library);
+    }//GEN-LAST:event_jButtonReturnBookActionPerformed
 
     /**
      * @param args the command line arguments
