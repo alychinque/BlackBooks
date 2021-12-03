@@ -4,17 +4,33 @@
  */
 package view;
 
+import controller.ReturnBookController;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import model.Borrow;
+
 /**
  *
  * @author alychinque
  */
 public class ReturnBook extends javax.swing.JFrame {
 
+    private final ReturnBookController controller;
+    private ArrayList<Borrow> borrowedBooks = new ArrayList<>();
+    private String[] books;
+
     /**
      * Creates new form ReturnBook
      */
-    public ReturnBook() {
+    public ReturnBook(ArrayList<Borrow> borrow) {
+        this.controller = new ReturnBookController(this);
         initComponents();
+        this.borrowedBooks = borrow;
+        setBookjComboBox();
     }
 
     /**
@@ -28,6 +44,10 @@ public class ReturnBook extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jComboBoxBooks = new javax.swing.JComboBox<>();
+        jButtonReturnBook = new javax.swing.JButton();
+        back = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(800, 500));
@@ -36,43 +56,152 @@ public class ReturnBook extends javax.swing.JFrame {
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setMaximumSize(new java.awt.Dimension(800, 500));
+        jPanel1.setMinimumSize(new java.awt.Dimension(800, 500));
+        jPanel1.setRequestFocusEnabled(false);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/blackBooks.png"))); // NOI18N
+
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel3.setText("Book:");
+
+        jComboBoxBooks.setFont(new java.awt.Font("Dialog", 0, 12)); // NOI18N
+        jComboBoxBooks.setMaximumSize(new java.awt.Dimension(470, 30));
+        jComboBoxBooks.setMinimumSize(new java.awt.Dimension(470, 30));
+        jComboBoxBooks.setPreferredSize(new java.awt.Dimension(470, 30));
+
+        jButtonReturnBook.setBackground(new java.awt.Color(204, 0, 0));
+        jButtonReturnBook.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jButtonReturnBook.setForeground(new java.awt.Color(0, 0, 0));
+        jButtonReturnBook.setText("Return Book");
+        jButtonReturnBook.setMaximumSize(new java.awt.Dimension(160, 50));
+        jButtonReturnBook.setMinimumSize(new java.awt.Dimension(160, 50));
+        jButtonReturnBook.setPreferredSize(new java.awt.Dimension(160, 50));
+        jButtonReturnBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonReturnBookActionPerformed(evt);
+            }
+        });
+
+        back.setText("Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(198, 198, 198)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(200, 200, 200)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(314, 314, 314)
+                        .addComponent(jButtonReturnBook, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(back)))
+                .addContainerGap(200, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jComboBoxBooks, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(130, 130, 130))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(127, 127, 127)
+                    .addComponent(jLabel3)
+                    .addContainerGap(616, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(389, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
+                .addComponent(jComboBoxBooks, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
+                .addComponent(jButtonReturnBook, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(79, 79, 79)
+                .addComponent(back)
+                .addGap(39, 39, 39))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGap(243, 243, 243)
+                    .addComponent(jLabel3)
+                    .addContainerGap(236, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        controller.back();
+    }//GEN-LAST:event_backActionPerformed
+
+    private void jButtonReturnBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReturnBookActionPerformed
+        if (JOptionPane.showConfirmDialog(rootPane, "You are returning the book: " + jComboBoxBooks.getSelectedItem()
+                + "\nAre you sure?", "WARNING",
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            // yes option
+            controller.returnBook(jComboBoxBooks.getSelectedItem(), borrowedBooks);
+        } else {
+            // no option
+        }
+    }//GEN-LAST:event_jButtonReturnBookActionPerformed
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton back;
+    private javax.swing.JButton jButtonReturnBook;
+    private javax.swing.JComboBox<String> jComboBoxBooks;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    private void setBookjComboBox() {
+        convertArray(borrowedBooks);
+        jComboBoxBooks.setModel(new javax.swing.DefaultComboBoxModel<>(books));
+
+        jComboBoxBooks.addActionListener(controller);
+        jComboBoxBooks.setActionCommand("book");
+    }
+
+    private void convertArray(ArrayList<Borrow> borrow) {
+        ArrayList<String> temp = new ArrayList<>();
+        for (int i = 0; i < borrow.size(); i++) {
+            if(borrow.get(i).isLent()){
+                System.out.println(borrow.get(i).isLent());
+                temp.add(borrow.get(i).getTitleBook());
+                System.out.println(temp);
+            }
+            //books[i] = borrow.get(i).getTitleBook();
+
+        }
+        books = new String[temp.size()];
+        for (int i = 0; i < temp.size(); i++) {
+            books[i] = temp.get(i);
+        }
+        Arrays.sort(books);
+    }
+
 }
