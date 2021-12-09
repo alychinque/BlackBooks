@@ -5,21 +5,30 @@
 package view;
 
 import controller.ListBooksController;
+import java.util.ArrayList;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import model.Book;
 
 /**
  *
  * @author alychinque
  */
 public class ListBooks extends javax.swing.JFrame {
-    
+
     private final ListBooksController controller;
+    Object rowInfoData[] = new Object[4];
+    private final ArrayList<Book> library;
 
     /**
      * Creates new form ListBooks
      */
-    public ListBooks() {
+    public ListBooks(ArrayList<Book> library, int sizeLibrary) {
         initComponents();
-        controller = new ListBooksController(this);
+        this.library = library;
+        this.controller = new ListBooksController(this);
+        setTable(library);
+
     }
 
     /**
@@ -31,69 +40,150 @@ public class ListBooks extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        background = new javax.swing.JPanel();
+        logo = new javax.swing.JLabel();
+        back = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable = new javax.swing.JTable();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setMaximumSize(new java.awt.Dimension(800, 500));
         setMinimumSize(new java.awt.Dimension(800, 500));
         setResizable(false);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel1.setMaximumSize(new java.awt.Dimension(800, 500));
-        jPanel1.setMinimumSize(new java.awt.Dimension(800, 500));
-        jPanel1.setPreferredSize(new java.awt.Dimension(800, 500));
-        jPanel1.setRequestFocusEnabled(false);
+        background.setBackground(new java.awt.Color(0, 0, 0));
+        background.setMaximumSize(new java.awt.Dimension(800, 500));
+        background.setMinimumSize(new java.awt.Dimension(800, 500));
+        background.setPreferredSize(new java.awt.Dimension(800, 500));
+        background.setRequestFocusEnabled(false);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/blackBooks.png"))); // NOI18N
+        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/images/blackBooks.png"))); // NOI18N
 
-        jButton1.setText("Back");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        back.setText("Back");
+        back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                backActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(198, 198, 198)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(jButton1)))
-                .addContainerGap(202, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(340, 340, 340)
-                .addComponent(jButton1)
-                .addContainerGap(25, Short.MAX_VALUE))
-        );
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title", "Author's name", "Author's surname", "Genre"
+            }
+        )
+        {
+            public boolean isCellEditable(int row, int column){
+                return false;
+            }
+        }
+    );
+    jTable.setEnabled(false);
+    jScrollPane1.setViewportView(jTable);
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+    jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "title", "name", "surname", "genre" }));
+    jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jComboBox1ActionPerformed(evt);
+        }
+    });
 
-        pack();
+    jLabel1.setBackground(new java.awt.Color(204, 204, 204));
+    jLabel1.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
+    jLabel1.setForeground(new java.awt.Color(0, 153, 153));
+    jLabel1.setText("Order by:");
+
+    javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
+    background.setLayout(backgroundLayout);
+    backgroundLayout.setHorizontalGroup(
+        backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
+            .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(backgroundLayout.createSequentialGroup()
+                    .addGap(200, 200, 200)
+                    .addComponent(logo)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel1)
+                    .addGap(4, 4, 4)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(back)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 740, javax.swing.GroupLayout.PREFERRED_SIZE)))
+            .addGap(30, 30, 30))
+    );
+    backgroundLayout.setVerticalGroup(
+        backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(backgroundLayout.createSequentialGroup()
+            .addGap(20, 20, 20)
+            .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(back)
+            .addContainerGap())
+    );
+
+    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+    getContentPane().setLayout(layout);
+    layout.setHorizontalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(background, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+    );
+    layout.setVerticalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(background, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+    );
+
+    pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         controller.back();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_backActionPerformed
 
-    
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        controller.sortTable(jComboBox1.getSelectedItem().toString(), this.library);
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton back;
+    private javax.swing.JPanel background;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable;
+    private javax.swing.JLabel logo;
     // End of variables declaration//GEN-END:variables
+
+    private void setTable(ArrayList<Book> library) {
+        DefaultTableModel infoTableModel = (DefaultTableModel) jTable.getModel();
+        infoTableModel.setRowCount(0);
+
+        for (int i = 0; i < library.size(); i++) {
+            rowInfoData[0] = library.get(i).getBookTitle();
+            rowInfoData[1] = library.get(i).getAuthorFirstName();
+            rowInfoData[2] = library.get(i).getAuthorLastName();
+            rowInfoData[3] = library.get(i).getGenre();
+
+            infoTableModel.addRow(rowInfoData);
+        }
+    }
+
+    public void setjTableSortedName(JTable jTable) {
+        this.jTable = jTable;
+        jScrollPane1.setViewportView(jTable);
+    }
+
 }
